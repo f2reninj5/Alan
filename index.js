@@ -1,11 +1,9 @@
 
-const fs = require('fs')
 const path = require('path')
-const https = require('https')
 const express = require('express')
 const app = express()
 
-const { port, key, cert, ca } = require('./config.json')
+const { port } = require('./config.json')
 
 app.use(express.static('public'))
 app.use((request, response, next) => {
@@ -21,14 +19,7 @@ app.get('/', (request, response) => {
 	response.render('home/main.ejs')
 })
 
-let options = {
-	
-    key: fs.readFileSync(key),
-    cert: fs.readFileSync(cert),
-    ca: fs.readFileSync(ca)
-}
+let server = app.listen(port, () => {
 
-let server = https.createServer(options, app).listen(port, () => {
-
-	console.log(`Listening...`)
+	console.log(`Listening on http://localhost:${port}`)
 })
