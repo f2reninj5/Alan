@@ -1,0 +1,148 @@
+
+/* COLOURS */
+
+:root {
+
+	--primary: #36393f;
+	--secondary: #f5ebda;
+	--accent1: #f0902f;
+	--accent2: #318bd0;
+}
+
+/* FONTS */
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/Regular.ttf");
+}
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/Italic.ttf");
+    font-style: italic;
+}
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* GLOBAL */
+
+* {
+
+	font-family: Ubuntu Mono;
+	font-size: 1rem;
+
+	margin: 0;
+	padding: 0;
+}
+
+body {
+
+	background-color: var(--primary);
+	color: var(--secondary);
+}
+
+a {
+
+	color: var(--accent1);
+}
+
+a:hover {
+
+	color: var(--accent2);
+}
+
+/* HEADER */
+
+header {
+
+	display: inline-grid;
+	grid-auto-columns: auto;
+	grid-auto-flow: column;
+
+	position: fixed;
+	top: 0;
+
+	width: 100%;
+
+	background-color: var(--primary);
+
+	border-style: solid;
+	border-width: 0 0 0.2em 0;
+	border-color: var(--accent2);
+}
+
+#header-logo, #navigation, #account-dropdown {
+
+	margin: 1em;
+}
+
+#header-logo {
+
+	height: 2em;
+}
+
+#navigation {
+
+	display: flex;
+	justify-content: center;
+}
+
+#navigation a {
+
+	margin: auto 1em auto 1em;
+}
+
+#account-dropdown {
+
+	margin: auto 1em auto auto;
+}
+
+/* ACCESSIBILITY */
+
+#skip-navigation {
+
+	position: absolute;
+	z-index: 1;
+
+	margin: 0.5em;
+	padding: 0.5em;
+
+	color: var(--secondary);
+	background-color: var(--accent2);
+	filter: opacity(0%);
+
+	border-radius: 0.1em;
+
+	transform: translateY(-120%);
+
+	transition: 500ms;
+}
+
+#skip-navigation:focus {
+
+	filter: opacity(100%);
+
+	transform: translateY(0);
+}
+
+/* CONTENT */
+
+#main-content {
+
+	padding: 1em;
+}

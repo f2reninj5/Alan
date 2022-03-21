@@ -1,24 +1,17 @@
 
+<a href="#main-content" id="skip-navigation">Skip Navigation</a>
+
 <header>
 
-	<a href="#main-content" id="skip-navigation">Skip Navigation</a>
+	<a href="/"><img id="header-logo" src="/images/logo.svg"></img></a>
 
-	<div id="header-content">
+	<span id="navigation">
 
-		<a href="/"><img src="/images/logo.svg" style="height: 4em;"></img></a>
+		<%- include(`${partialsDir}/navigation`) %>
+	</span>
 
-		<span id="navigation">
+	<div id="account-dropdown">
 
-			<%- include(`${partialsDir}/navigation`) %>
-		</span>
+		<a href="/"><p>Login with Discord</p></a>
 	</div>
-
-	<button id="navigation-hamburger" class="icon"><img src="/images/icons/hamburger.svg" style="height: 4em;"></img></button>
-
-	<script defer src="/scripts/partials/header.js"></script>
 </header>
-
-<div id="navigation-hamburger-list">
-
-	<%- include(`${partialsDir}/navigation`) %>
-</div>
