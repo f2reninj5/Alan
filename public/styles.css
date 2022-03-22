@@ -4,6 +4,7 @@
 :root {
 
 	--primary: #36393f;
+	--primary-alt: #202225;
 	--secondary: #f5ebda;
 	--accent1: #f0902f;
 	--accent2: #318bd0;
@@ -14,27 +15,27 @@
 @font-face {
 
     font-family: "Ubuntu Mono";
-    src: url("/fonts/Ubuntu_Mono/Regular.ttf");
+    src: url("/fonts/Ubuntu_Mono/Regular.woff");
 }
 
 @font-face {
 
     font-family: "Ubuntu Mono";
-    src: url("/fonts/Ubuntu_Mono/Bold.ttf");
+    src: url("/fonts/Ubuntu_Mono/Bold.woff");
     font-weight: bold;
 }
 
 @font-face {
 
     font-family: "Ubuntu Mono";
-    src: url("/fonts/Ubuntu_Mono/Italic.ttf");
+    src: url("/fonts/Ubuntu_Mono/Italic.woff");
     font-style: italic;
 }
 
 @font-face {
 
     font-family: "Ubuntu Mono";
-    src: url("/fonts/Ubuntu_Mono/BoldItalic.ttf");
+    src: url("/fonts/Ubuntu_Mono/BoldItalic.woff");
     font-weight: bold;
     font-style: italic;
 }
@@ -64,6 +65,22 @@ a {
 a:hover {
 
 	color: var(--accent2);
+}
+
+/* SCROLL BAR */
+
+::-webkit-scrollbar {
+
+	width: 1em;
+}
+
+::-webkit-scrollbar-thumb {
+
+	background-color: var(--primary-alt);
+
+	border: solid;
+	border-color: var(--primary);
+	border-radius: 1em;
 }
 
 /* HEADER */
