@@ -161,5 +161,15 @@ header {
 
 #main-content {
 
+	display: grid;
+	grid-auto-rows: auto;
+	row-gap: 1em;
+
+	margin-top: 5em;
 	padding: 1em;
+}
+
+#main-content * {
+
+	margin: auto;
 }
