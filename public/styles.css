@@ -173,3 +173,32 @@ header {
 
 	margin: auto;
 }
+
+/* DEV */
+
+@keyframes copy {
+
+	0% { color: transparent; }
+	50% { color: var(--primary-alt); }
+	100% { color: transparent; }
+}
+
+.colour {
+
+	display: inline-block;
+
+	width: 8em;
+	height: 8em;
+
+	color: transparent;
+}
+
+.colour:hover {
+
+	border-style: unset;
+}
+
+.colour:active {
+
+	border-style: inset;
+}

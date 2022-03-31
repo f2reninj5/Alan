@@ -1,15 +1,17 @@
 
-$('.colour').on('click', () => {
+$('.colour').on('click', function() { // normal function notation so that $(this) returns correct object
 
-    var copyText = document.getElementById("myInput");
+    let colour = $(this).css("background-color").match(/[\d]{1,3}/g).map(n => parseInt(n).toString(16)).join('')
 
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    navigator.clipboard.writeText(colour)
 
-   /* Copy the text inside the text field */
-  navigator.clipboard.writeText(copyText.value);
+    let time = 2000
+    
+    $(this).css("animation", `copy ${time}ms`)
 
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
+    setTimeout(() => {
+
+        $(this).css("animation", "")
+
+    }, time)
 })
