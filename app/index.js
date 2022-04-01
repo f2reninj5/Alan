@@ -1,8 +1,5 @@
 
-const Discord = require('discord.js')
+module.exports = {
 
-const client = new Discord.Client({ intents: [] }) // { intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] }
-
-client.login(require('../tokens.json').token)
-
-module.exports = client
+    Client: require('./Client')
+}
