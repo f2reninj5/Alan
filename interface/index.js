@@ -45,25 +45,19 @@ app.get('/authorise', async (request, response) => {
 
 	// post request
 
-	let data = {
-		
-		'client_id': Client.user.id,
-		'client_secret': require('../tokens.json').token,
-		'grant_type': 'authorization_code',
-		'code': code,
-		'redirect_uri': request.authURI
-	}
-
-	let headers = {
-
-		'Content-Type': 'application/x-www-form-urlencoded'
-	}
-
-	let tokenResponse = await fetch(`https://discord.com/api/v8/oauth2/token`, {
-
+	let tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
 		method: 'POST',
-		body: new URLSearchParams(data),
-		headers: headers
+		body: new URLSearchParams({
+			client_id: Client.user.id,
+			client_secret: 'OTU1MTE2NzAyNDE5NTQyMDM2.Yjc_vw.NxAxQyq7AaPOXz8olp97krvUWQA',
+			code,
+			grant_type: 'authorization_code',
+			redirect_uri: `http://localhost`,
+			scope: 'identify guilds',
+		}),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 
 	console.log(tokenResponse)
