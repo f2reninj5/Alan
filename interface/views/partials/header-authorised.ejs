@@ -1,0 +1,17 @@
+
+<a href="#main-content" id="skip-navigation">Skip Navigation</a>
+
+<header>
+
+	<a href="/"><img id="header-logo" src="/images/logo.svg"></img></a>
+
+	<span id="navigation">
+
+		<%- include(`${partialsDir}/navigation`) %>
+	</span>
+
+	<div id="account-dropdown">
+
+		<p id="username"><%= locals.user.username %></p><img id="avatar" src="<%= `https://cdn.discordapp.com/avatars/${locals.user.id}/${locals.user.avatar}` %>">
+	</div>
+</header>

@@ -129,6 +129,17 @@ header {
 	margin: auto 1em auto auto;
 }
 
+#account-dropdown * {
+
+	display: inline;
+}
+
+#avatar {
+
+	height: 3em;
+	border-radius: 100%;
+}
+
 /* ACCESSIBILITY */
 
 #skip-navigation {
