@@ -10,8 +10,8 @@
 		<%- include(`${partialsDir}/navigation`) %>
 	</span>
 
-	<div id="account-dropdown">
+	<span id="account-dropdown">
 
 		<p id="username"><%= locals.user.username %></p><img id="avatar" src="<%= `https://cdn.discordapp.com/avatars/${locals.user.id}/${locals.user.avatar}` %>">
-	</div>
+	</span>
 </header>

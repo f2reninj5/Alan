@@ -85,7 +85,7 @@ app.get('/authorise', async (request, response) => {
 		},
 	})).json()
 
-	response.cookie('access_token', authData.access_token, { expires: new Date(Date.now() + authData.expires_in) })
+	response.cookie('access_token', authData.access_token, { expires: new Date(Date.now() + (1000 * authData.expires_in)) })
 
 	response.redirect('/')
 })

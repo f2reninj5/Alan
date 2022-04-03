@@ -51,6 +51,12 @@
 	padding: 0;
 }
 
+*::selection {
+
+	background-color: var(--accent1);
+	color: var(--secondary);
+}
+
 body {
 
 	background-color: var(--primary);
@@ -88,7 +94,7 @@ a:hover {
 header {
 
 	display: inline-grid;
-	grid-auto-columns: auto;
+	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 
 	position: fixed;
@@ -103,12 +109,14 @@ header {
 	border-color: var(--accent2);
 }
 
-#header-logo, #navigation, #account-dropdown {
+header * {
 
-	margin: 1em;
+	font-size: 1.2rem;
 }
 
 #header-logo {
+
+	margin: 1em 2em 1em 2em;
 
 	height: 2em;
 }
@@ -126,17 +134,20 @@ header {
 
 #account-dropdown {
 
-	margin: auto 1em auto auto;
+	display: flex;
+	justify-content: right;
+
+	margin: auto 2em auto auto;
 }
 
 #account-dropdown * {
 
-	display: inline;
+	margin: auto 0 auto 1em;
 }
 
 #avatar {
 
-	height: 3em;
+	height: 2em;
 	border-radius: 100%;
 }
 
@@ -176,13 +187,41 @@ header {
 	grid-auto-rows: auto;
 	row-gap: 1em;
 
-	margin-top: 5em;
-	padding: 1em;
+	margin-top: 6em;
+	padding: 2em 4em 2em 4em;
 }
 
 #main-content * {
 
 	margin: auto;
+}
+
+.console {
+
+	text-align: left;
+
+	padding: 2em;
+
+	width: 80%;
+
+	background-color: var(--primary-alt);
+}
+
+.console * {
+
+	font-size: 1.2rem;
+}
+
+#console-cursor {
+
+	display: inline;
+
+	animation: blink 1s steps(1, start) infinite;
+}
+
+@keyframes blink {
+
+	50% { opacity: 0; }
 }
 
 /* DEV */
