@@ -10,8 +10,20 @@
 		<%- include(`${partialsDir}/navigation`) %>
 	</span>
 
-	<span id="account-dropdown">
+	<span id="account-container">
 
-		<p id="username"><%= locals.user.username %></p><img id="avatar" src="<%= `https://cdn.discordapp.com/avatars/${locals.user.id}/${locals.user.avatar}` %>">
+		<a id="account-dropdown" href="/dashboard">
+			
+			<p id="username"><%= locals.user.username %></p><img id="avatar" src="<%= `https://cdn.discordapp.com/avatars/${locals.user.id}/${locals.user.avatar}` %>">
+		</a>
+
+		<div id="account-dropdown-content">
+
+			<div id="account-dropdown-content-list">
+
+				<a href="/dashboard">Dashboard</a>
+				<a href="/logout">Log out</a>
+			</div>
+		</div>
 	</span>
 </header>

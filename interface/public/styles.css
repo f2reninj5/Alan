@@ -132,17 +132,46 @@ header * {
 	margin: auto 1em auto 1em;
 }
 
+#account-container {
+
+	margin: auto 2em auto auto;
+}
+
 #account-dropdown {
 
 	display: flex;
 	justify-content: right;
-
-	margin: auto 2em auto auto;
 }
 
 #account-dropdown * {
 
 	margin: auto 0 auto 1em;
+}
+
+#account-dropdown-content {
+
+	display: none;
+	position: absolute;
+	right: 0;
+}
+
+#account-dropdown-content-list {
+
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	background-color: var(--primary-alt);
+	padding: 1em;
+}
+
+#account-dropdown-content > * {
+
+	margin: 1em;
+}
+
+#account-container:hover #account-dropdown-content {
+
+	display: block;
 }
 
 #avatar {
