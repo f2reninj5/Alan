@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<%- include(`${partialsDir}/meta`) %>
+
+		<title>Dashboard | Alan.</title>
+	</head>
+
+	<body>
+		
+		<%- include(`${partialsDir}/header-authorised`) %>
+
+		<div id="main-content">
+			
+            <% for (let guild of locals.guilds) { %> 
+
+                <p><%= guild.name %></p>
+            <% } %>
+		</div>
+
+		<script defer src="/scripts/dashboard/main.js"></script>
+	</body>
+</html>
