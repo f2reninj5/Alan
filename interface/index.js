@@ -17,6 +17,18 @@ app.use(cookieParser())
 
 app.use(express.static(path.resolve(__dirname, './public'))) // PATH: public
 
+function generateOAuthURL(clientId, scope, options) {
+
+	let oAuthURL = `https://discord.com/oauth2/authorize?client_id=${encodeURIComponent(clientId)}&scope=${encodeURIComponent(scope)}`
+
+	for (let option of options) {
+
+		oAuthURL += `&${option.name}=${option.value}`
+	}
+
+	return oAuthURL
+}
+
 app.use((request, response, next) => {
 	
 	response.locals.partialsDir = path.resolve(__dirname, './views/partials') // PATH: views/partials
@@ -26,7 +38,17 @@ app.use((request, response, next) => {
 
 	request.authURI = request.fullHost + '/authorise'
 	request.authScope = 'identify guilds'
-	request.authURL = `https://discord.com/api/oauth2/authorize?client_id=${Client.user.id}&redirect_uri=${encodeURIComponent(request.authURI)}&response_type=code&scope=${encodeURIComponent(request.authScope)}`
+	request.authURL = generateOAuthURL(Client.user.id, 'identify guilds', [
+
+		{
+			name: 'response_type',
+			value: 'code'
+		},
+		{
+			name: 'redirect_uri',
+			value: request.fullHost + '/authorise'
+		}
+	])
 	next()
 })
 
@@ -120,6 +142,80 @@ app.get('/authorise', async (request, response) => {
 	response.cookie('access_token', authData.access_token, { expires: new Date(Date.now() + (1000 * authData.expires_in)) })
 
 	response.redirect('/')
+})
+
+app.get('/return', async (request, response) => {
+
+	let code = request.query.code
+
+	if (!code) {
+
+		return response.redirect('/')
+	}
+
+	let guildId = request.query.guild_id
+
+	if (guildId) {
+
+		return response.redirect(`/guilds/${guildId}`)
+	}
+
+	response.send('Success!')
+})
+
+app.get('/guilds/:guildId', async (request, response) => {
+
+	if (!await request.cookies.access_token) {
+
+		return response.redirect(request.authURL)
+	}
+
+	let guildId = request.params.guildId
+	let guild
+
+	try {
+
+		guild = await Client.guilds.fetch(guildId)
+
+	} catch (err) {
+
+		if (err.httpStatus == 403) {
+		
+			return response.redirect(generateOAuthURL(Client.user.id, 'bot applications.commands', [
+	
+				{
+					name: 'response_type',
+					value: 'code'
+				},
+				{
+					name: 'permissions',
+					value: '8'
+				},
+				{
+					name: 'guild_id',
+					value: guildId
+				},
+				{
+					name: 'redirect_uri',
+					value: request.fullHost + '/return'
+				}
+			]))
+		}
+	}
+
+	let user = await (await fetch('https://discord.com/api/users/@me', {
+
+		headers: {
+
+			authorization: `Bearer ${request.cookies.access_token}`
+		}
+	})).json()
+
+	response.render('guilds/main', {
+
+		user,
+		guild
+	})
 })
 
 app.get('/logout', async (request, response) => {

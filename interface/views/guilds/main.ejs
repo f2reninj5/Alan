@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<%- include(`${partialsDir}/meta`) %>
+
+		<title>Alan.</title>
+	</head>
+
+	<body>
+		
+		<%- include(`${partialsDir}/header-authorised`) %>
+		
+		<div id="main-content">
+
+            <img id="icon" src="<%= `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
+        </div>
+
+        <style>
+        
+            #icon {
+
+                height: 4em;
+            }
+        </style>
+
+		<script defer src="/scripts/guilds/main.js"></script>
+	</body>
+</html>

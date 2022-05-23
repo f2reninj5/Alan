@@ -14,11 +14,48 @@
 
 		<div id="main-content">
 			
-            <% for (let guild of locals.guilds) { %> 
+			<div class="guild-list">
 
-                <p><%= guild.name %></p>
-            <% } %>
+				<% for (let guild of locals.guilds) { %> 
+
+					<a class="guild-item" href="/guilds/<%= guild.id %>">
+					
+						<img src="<%= (guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/images/favicon.svg') %> "><p><%= guild.name %></p>
+					</a>
+				<% } %>
+			</div>
 		</div>
+
+		<style>
+
+			.guild-list {
+
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+			}
+
+			.guild-item {
+
+				display: flex;
+				flex-direction: row;
+				gap: 1em;
+				justify-content: left;
+			}
+
+			.guild-item p {
+
+				margin: auto 0 auto 0;
+				display: inline-block;
+				font-size: 1.5em;
+			}
+
+			.guild-item img {
+
+				height: 4em;
+				border-radius: 1em;
+			}
+		</style>
 
 		<script defer src="/scripts/dashboard/main.js"></script>
 	</body>
