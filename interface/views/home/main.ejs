@@ -10,7 +10,7 @@
 
 	<body>
 		
-		<%- include(`${partialsDir}/header`) %>
+		<%- include((locals.user ? `${partialsDir}/header-authorised` : `${partialsDir}/header`)) %>
 		
 		<div id="main-content">
 			
@@ -31,7 +31,7 @@
 
 			<br>
 
-			<div style="padding: 1em; background-color: var(--primary-alt);">
+			<div class="colour-box">
 
 				<button class="colour" style="background-color: #36393f; border-color: #36393f;">Copied</button>
 				<button class="colour" style="background-color: #f5ebda; border-color: #f5ebda;">Copied</button>
@@ -39,6 +39,8 @@
 				<button class="colour" style="background-color: #318bd0; border-color: #318bd0;">Copied</button>
 			</div>
 		</div>
+
+		<%- include('./styles/main') %> 
 
 		<script defer src="/scripts/home/main.js"></script>
 	</body>

@@ -1,0 +1,66 @@
+<style>
+
+.console {
+
+    text-align: left;
+
+    padding: 2em;
+
+    width: 80%;
+
+    background-color: var(--primary-alt);
+}
+
+.console * {
+
+    font-size: 1.2rem;
+}
+
+#console-cursor {
+
+    display: inline;
+
+    animation: blink 1s steps(1, start) infinite;
+}
+
+@keyframes blink {
+
+    50% { opacity: 0; }
+}
+
+/* DEV */
+
+@keyframes copy {
+
+    0% { color: transparent; }
+    50% { color: var(--primary-alt); }
+    100% { color: transparent; }
+}
+
+.colour {
+
+    display: inline-block;
+
+    width: 8em;
+    height: 8em;
+
+    color: transparent;
+}
+
+.colour:hover {
+
+    border-style: unset;
+}
+
+.colour:active {
+
+    border-style: inset;
+}
+
+.colour-box {
+
+    padding: 1em;
+    background-color: var(--primary-alt);
+}
+
+</style>

@@ -14,16 +14,10 @@
 		
 		<div id="main-content">
 
-            <img id="icon" src="<%= `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
+            <img class="icon" src="<%= `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
         </div>
 
-        <style>
-        
-            #icon {
-
-                height: 4em;
-            }
-        </style>
+        <%- include('./styles/main') %>
 
 		<script defer src="/scripts/guilds/main.js"></script>
 	</body>

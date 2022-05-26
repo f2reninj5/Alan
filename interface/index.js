@@ -1,12 +1,14 @@
 
 const path = require('path')
-const fetch = require('node-fetch')
+const { fetchBuilder, MemoryCache } = require('node-fetch-cache')
+const fetch = fetchBuilder.withCache(new MemoryCache({ ttl: 1000 * 60 * 5 }))
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const app = express()
 
 const { Client } = require('../app')
-const { port } = require('./config.json') // PATH: config
+const TOKEN = process.env.TOKEN
+const PORT = process.env.PORT
 
 app.enable('trust proxy')
 
@@ -53,21 +55,21 @@ app.use((request, response, next) => {
 })
 
 app.get('/', async (request, response) => {
+	
+	let user = null
+	
+	if (request.cookies.access_token) {
 
-	if (!await request.cookies.access_token) {
+		user = await (await fetch('https://discord.com/api/users/@me', {
 
-		return response.render('home/main')
+			headers: {
+	
+				authorization: `Bearer ${request.cookies.access_token}`
+			}
+		})).json()
 	}
 
-	let user = await (await fetch('https://discord.com/api/users/@me', {
-
-		headers: {
-
-			authorization: `Bearer ${request.cookies.access_token}`
-		}
-	})).json()
-
-	response.render('home/main-authorised', {
+	response.render('home/main', {
 		
 		user
 	})
@@ -75,7 +77,7 @@ app.get('/', async (request, response) => {
 
 app.get('/dashboard', async (request, response) => {
 
-	if (!await request.cookies.access_token) {
+	if (!request.cookies.access_token) {
 
 		return response.redirect(request.authURL)
 	}
@@ -165,13 +167,26 @@ app.get('/return', async (request, response) => {
 
 app.get('/guilds/:guildId', async (request, response) => {
 
-	if (!await request.cookies.access_token) {
+	if (!request.cookies.access_token) {
 
 		return response.redirect(request.authURL)
 	}
 
 	let guildId = request.params.guildId
 	let guild
+
+	let guilds = await (await fetch('https://discord.com/api/users/@me/guilds', {
+
+		headers: {
+
+			authorization: `Bearer ${request.cookies.access_token}`
+		}
+	})).json()
+
+	if (guilds.filter(guild => guild.id == guildId).length == 0) {
+
+		return response.redirect('/dashboard')
+	}
 
 	try {
 
@@ -225,7 +240,7 @@ app.get('/logout', async (request, response) => {
 	response.redirect('/')
 })
 
-module.exports = app.listen(port, () => {
+module.exports = app.listen(PORT, () => {
 
-	console.log(`Listening on http://localhost:${port}`)
+	console.log(`Listening on http://localhost:${PORT}`)
 })
