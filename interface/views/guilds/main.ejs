@@ -14,7 +14,12 @@
 		
 		<div id="main-content">
 
-            <img class="icon" src="<%= `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
+			<div class="information-box">
+
+				<img class="icon" src="<%- `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
+			
+				<h class="name"><%- locals.guild.name %></h>
+			</div>
         </div>
 
         <%- include('./styles/main') %>

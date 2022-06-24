@@ -14,7 +14,7 @@
 
 		<a id="account-dropdown" href="/dashboard">
 			
-			<p id="username"><%= locals.user.username %></p><img id="avatar" src="<%= `https://cdn.discordapp.com/avatars/${locals.user.id}/${locals.user.avatar}` %>">
+			<p id="username"><%- locals.user.username %></p><img id="avatar" src="<%- `https://cdn.discordapp.com/avatars/${locals.user.id}/${locals.user.avatar}` %>">
 		</a>
 
 		<div id="account-dropdown-content">

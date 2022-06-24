@@ -18,9 +18,9 @@
 
 				<% for (let guild of locals.guilds) { %> 
 
-					<a class="guild-item" href="/guilds/<%= guild.id %>">
+					<a class="guild-item" href="/guilds/<%- guild.id %>">
 					
-						<img src="<%= (guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/images/favicon.svg') %> "><p><%= guild.name %></p>
+						<img src="<%- (guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/images/favicon.svg') %> "><p><%- guild.name %></p>
 					</a>
 				<% } %>
 			</div>
