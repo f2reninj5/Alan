@@ -1,0 +1,4 @@
+{
+    "authPath": "/authorise",
+    "scope": "identify guilds"
+}

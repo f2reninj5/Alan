@@ -1,0 +1,229 @@
+/* COLOURS */
+
+:root {
+
+    --primary: #36393f;
+    --primary-alt: #202225;
+    --secondary: #f5ebda;
+    --accent1: #f0902f;
+    --accent2: #318bd0;
+}
+
+/* FONTS */
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/Regular.woff");
+}
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/Bold.woff");
+    font-weight: bold;
+}
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/Italic.woff");
+    font-style: italic;
+}
+
+@font-face {
+
+    font-family: "Ubuntu Mono";
+    src: url("/fonts/Ubuntu_Mono/BoldItalic.woff");
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* GLOBAL */
+
+* {
+
+    font-family: Ubuntu Mono, monospace;
+    font-size: 1rem;
+
+    margin: 0;
+    padding: 0;
+}
+
+*::selection {
+
+    background-color: var(--accent1);
+    color: var(--secondary);
+}
+
+body {
+
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+a {
+
+    color: var(--accent1);
+}
+
+a:hover {
+
+    color: var(--accent2);
+}
+
+/* SCROLL BAR */
+
+::-webkit-scrollbar {
+
+    width: 1em;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background-color: var(--primary-alt);
+
+    border: solid;
+    border-color: var(--primary);
+    border-radius: 1em;
+}
+
+/* HEADER */
+
+header {
+
+    display: inline-grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+
+    position: fixed;
+    top: 0;
+
+    width: 100%;
+
+    background-color: var(--primary);
+
+    border-style: solid;
+    border-width: 0 0 0.2em 0;
+    border-color: var(--accent2);
+}
+
+header * {
+
+    font-size: 1.2rem;
+}
+
+#header-logo {
+
+    margin: 1em 2em 1em 2em;
+
+    height: 2em;
+}
+
+/* navigation */
+
+#navigation {
+
+    display: flex;
+    justify-content: center;
+}
+
+#navigation a {
+
+    margin: auto 1em auto 1em;
+}
+
+/* account */
+
+#account-container {
+
+    margin: auto 2em auto auto;
+}
+
+#account-dropdown {
+
+    display: flex;
+    justify-content: right;
+}
+
+#account-dropdown * {
+
+    margin: auto 0 auto 1em;
+}
+
+#account-dropdown-content {
+
+    display: none;
+    position: absolute;
+    right: 0;
+}
+
+#account-dropdown-content-list {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--primary-alt);
+    padding: 1em;
+}
+
+#account-dropdown-content>* {
+
+    margin: 1em;
+}
+
+#account-container:hover #account-dropdown-content {
+
+    display: block;
+}
+
+#avatar {
+
+    height: 2em;
+    border-radius: 100%;
+}
+
+/* ACCESSIBILITY */
+
+#skip-navigation {
+
+    position: absolute;
+    z-index: 1;
+
+    margin: 0.5em;
+    padding: 0.5em;
+
+    color: var(--secondary);
+    background-color: var(--accent2);
+    filter: opacity(0%);
+
+    border-radius: 0.1em;
+
+    transform: translateY(-500%);
+
+    transition: 1000ms;
+}
+
+#skip-navigation:focus {
+
+    filter: opacity(100%);
+
+    transform: translateY(0);
+}
+
+/* CONTENT */
+
+#main-content {
+
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 1em;
+
+    margin-top: 6em;
+    padding: 2em 4em 2em 4em;
+}
+
+#main-content>* {
+
+    margin: auto;
+}

@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<%- include(`${partialsDir}/meta`) %>
+		<link href="/styles/home/main.css" rel="stylesheet" type="text/css">
+
+		<title>Alan.</title>
+	</head>
+
+	<body>
+		
+		<%- include((locals.user ? `${partialsDir}/header-authorised` : `${partialsDir}/header`)) %>
+		
+		<div id="main-content">
+			
+			<div class="console">
+
+				<p>
+					Alan. [Version 0.0.1]
+					<br><br><br>
+					Hello. My name is Alan.
+					<br><br>
+					I am an automated moderation assistant for your Discord server.
+					<br><br><br><br>
+					Click <a href="https://github.com/f2reninj5/alan">here</a> to view Alan's source code!
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+					A:\><span id="console-cursor">_</span>
+				</p>
+			</div>
+
+			<br>
+
+			<div class="colour-box">
+
+				<button class="colour" style="background-color: #36393f; border-color: #36393f;">Copied</button>
+				<button class="colour" style="background-color: #f5ebda; border-color: #f5ebda;">Copied</button>
+				<button class="colour" style="background-color: #f0902f; border-color: #f0902f;">Copied</button>
+				<button class="colour" style="background-color: #318bd0; border-color: #318bd0;">Copied</button>
+			</div>
+		</div>
+
+		<script defer src="/scripts/home/main.js"></script>
+	</body>
+</html>

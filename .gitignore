@@ -1,4 +1,5 @@
-tokens.json
-config.json
 node_modules/
-.vscode/launch.json
+.vscode/
+src/etc/*
+!src/etc/default/
+dist/
