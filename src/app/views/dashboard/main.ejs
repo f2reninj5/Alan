@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<%- include(`${partialsDir}/meta`) %>
+		<link href="/styles/dashboard/main.css" rel="stylesheet" type="text/css">
+
+		<title>Dashboard | Alan.</title>
+	</head>
+
+	<body>
+		
+		<%- include(`${partialsDir}/header-authorised`) %>
+
+		<div id="main-content">
+			
+			<div class="guild-list">
+
+				<% for (let guild of locals.guilds) { %> 
+
+					<a class="guild-item" href="/guild/<%- guild.id %>">
+					
+						<img src="<%- (guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/images/favicon.svg') %> "><p><%- guild.name %></p>
+					</a>
+				<% } %>
+			</div>
+		</div>
+
+		<script defer src="/scripts/dashboard/main.js"></script>
+	</body>
+</html>

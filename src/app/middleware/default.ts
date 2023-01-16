@@ -3,6 +3,7 @@ import path from 'path'
 import express from 'express'
 import e from 'express'
 import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
 
 export default function configure(app: e.Express): void {
 
@@ -12,6 +13,8 @@ export default function configure(app: e.Express): void {
     app.set('views', path.resolve(__dirname, '../views'))
 
     app.use(cookieParser())
+    app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.json())
 
     app.use(express.static(path.resolve(__dirname, '../public')))
 

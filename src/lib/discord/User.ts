@@ -1,5 +1,6 @@
 
 import { fetch } from '../Fetch'
+import Guild from './Guild'
 
 export default class User {
 
@@ -14,5 +15,12 @@ export default class User {
         })
 
         return user.json()
+    }
+
+    static async hasPermissionInGuild(accessToken: string, guildId: string) {
+
+        let guilds = await Guild.fetch(accessToken)
+
+        return guilds.find((guild: any) => guild.id == guildId && guild.permissions == 2147483647)
     }
 }

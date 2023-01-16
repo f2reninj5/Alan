@@ -1,4 +1,5 @@
 
 import authoriseRouter from './authorise'
+import guildRouter from './guild'
 
-export { authoriseRouter }
+export { authoriseRouter, guildRouter }

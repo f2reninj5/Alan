@@ -7,6 +7,8 @@ import { secret } from '../etc/client.json'
 
 export default class OAuth {
 
+    static authPath = authPath
+
     static host(request: Request): string {
 
         return request.protocol + '://' + request.headers.host
@@ -51,6 +53,30 @@ export default class OAuth {
             {
                 name: 'redirect_uri',
                 value: OAuth.authRoute(request)
+            }
+        ])
+    }
+
+    static botInviteAuthURL(request: Request, guildId: string) {
+
+        return OAuth.authURL(Client.user!.id, 'bot applications.commands', [
+
+            {
+                name: 'response_type',
+                value: 'code'
+            },
+            {
+                name: 'permissions',
+                value: '8'
+            },
+            {
+                name: 'guild_id',
+                value: guildId
+            },
+            {
+                name: 'redirect_uri',
+                value: OAuth.host(request) + `/${guildId}/add` // needs to match valid uri on developer portal
+                // https://stackoverflow.com/questions/58858066/pass-a-string-through-discord-oauth
             }
         ])
     }
