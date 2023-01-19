@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<%- include(`${partialsDir}/meta`) %>
+		<link href="/styles/guild/add.css" rel="stylesheet" type="text/css">
+
+		<title>Alan.</title>
+	</head>
+
+	<body>
+		
+		<div id="main-content">
+
+			<div class="information-box">
+
+				<img class="icon" src="<%- `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
+			
+				<h class="name"><%- locals.guild.name %></h>
+			</div>
+
+			<form>
+
+				<select id="select-timezone" autocomplete required>
+					<option value="europe/dublin">Europe/Dublin</option>
+					<option value="europe/london">Europe/London</option>
+				</select>
+			</form>
+        </div>
+
+		<script defer src="/scripts/guild/add.js"></script>
+	</body>
+</html>

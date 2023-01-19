@@ -16,6 +16,46 @@ router.use((request, response, next) => {
     next()
 })
 
+router.get('/add', async (request, response) => {
+
+    let guildId = request.query.guildId || request.query.guild_id
+    let code = request.query.code
+
+    if (typeof guildId !== 'string') {
+
+        return response.redirect('/dashboard')
+    }
+
+    if (!code) {
+
+        return response.redirect(OAuth.botInviteAuthURL(request, guildId))
+    }
+
+    let guild = await Client.guilds.fetch(guildId)
+
+    return response.render('guild/add', {
+
+        guild
+    })
+})
+
+/* router.post('/add', async (request, response) => {
+
+    let guildId = request.params.guildId
+
+    if (!(await User.hasPermissionInGuild(request.cookies.access_token, guildId))) {
+
+        return response.redirect('/dashboard')
+    }
+
+    // let guild = await Client.guilds.fetch(guildId)
+
+    // get config settings from post body
+    // add guild to database
+
+    return response.redirect(`/guild/${guildId}`)
+}) */
+
 router.get('/:guildId', async (request, response) => {
 
     let guildId = request.params.guildId
@@ -37,7 +77,9 @@ router.get('/:guildId', async (request, response) => {
             return response.redirect('/dashboard')
         }
 
-        return response.redirect(`/guild/${guildId}/add`)
+        let query = new URLSearchParams({ guildId: guildId })
+
+        return response.redirect(`/guild/add?${query.toString()}`)
     }
 
     let user = await User.fetch(request.cookies.access_token)
@@ -47,41 +89,6 @@ router.get('/:guildId', async (request, response) => {
         user,
         guild
     })
-})
-
-router.get('/:guildId/add', async (request, response) => {
-
-    let guildId = request.params.guildId
-    let code = request.query.code
-
-    if (!code) {
-
-        return response.redirect(OAuth.botInviteAuthURL(request, guildId))
-    }
-
-    let guild = await Client.guilds.fetch(guildId)
-
-    return response.render('guild/add', {
-
-        guild
-    })
-})
-
-router.post('/:guildId/add', async (request, response) => {
-
-    let guildId = request.params.guildId
-
-    if (!(await User.hasPermissionInGuild(request.cookies.access_token, guildId))) {
-
-        return response.redirect('/dashboard')
-    }
-
-    // let guild = await Client.guilds.fetch(guildId)
-
-    // get config settings from post body
-    // add guild to database
-
-    return response.redirect(`/guild/${guildId}`)
 })
 
 export default router

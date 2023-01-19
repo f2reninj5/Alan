@@ -2,7 +2,7 @@
 import express from 'express'
 import configure from './middleware/default'
 import { authoriseRouter, guildRouter } from './routers/index'
-import { Guild, User } from '../lib/discord'
+import { User } from '../lib/discord'
 import OAuth from '../lib/OAuth'
 
 const app = express()
@@ -34,7 +34,7 @@ app.get('/dashboard', async (request, response) => {
     }
 
     let user = await User.fetch(request.cookies.access_token)
-    let guilds = await Guild.fetch(request.cookies.access_token)
+    let guilds = await User.fetchGuilds(request.cookies.access_token)
 
     guilds = guilds.filter((guild: any) => guild.permissions == 2147483647)
 

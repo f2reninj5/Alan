@@ -75,8 +75,7 @@ export default class OAuth {
             },
             {
                 name: 'redirect_uri',
-                value: OAuth.host(request) + `/${guildId}/add` // needs to match valid uri on developer portal
-                // https://stackoverflow.com/questions/58858066/pass-a-string-through-discord-oauth
+                value: OAuth.host(request) + `/guild/add`
             }
         ])
     }
