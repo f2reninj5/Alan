@@ -1,0 +1,64 @@
+input,
+select {
+
+    height: 2em;
+
+    padding: 0 0.5em 0 0.5em;
+
+    text-align: center;
+
+    color: var(--secondary);
+    background-color: var(--primary-alt);
+
+    border: none;
+    border-radius: 2em;
+}
+
+input:read-only,
+select:read-only,
+input:disabled,
+select:disabled {
+
+    color: var(--primary);
+}
+
+#config-form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    min-width: 30%;
+}
+
+#form-header {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#form-header>* {
+
+    font-size: 4em;
+    height: 1em;
+}
+
+#config-manual-channels {
+
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+#config-manual-channels>div {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#channel-select-div {
+
+    flex-grow: 1;
+}

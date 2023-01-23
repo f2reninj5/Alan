@@ -13,19 +13,59 @@
 		
 		<div id="main-content">
 
-			<div class="information-box">
+			<form id="config-form" method="post" action="/guild/add">
 
-				<img class="icon" src="<%- `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
-			
-				<h class="name"><%- locals.guild.name %></h>
-			</div>
+				<div id="form-header">
 
-			<form>
+					<img id="server-icon" src="<%- `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
+					<h id="server-name"><%- locals.guild.name %></h>
+				</div>
 
-				<select id="select-timezone" autocomplete required>
-					<option value="europe/dublin">Europe/Dublin</option>
+				<label for="guild-id-input">Guild ID</label>
+				<input id="guild-id-input" value="<%- locals.guild.id %>" readonly required>
+
+				<label for="select-region">Region</label>
+				<select id="select-region" required>
+
+					<option value="europe/dublin">America/Detroit</option>
 					<option value="europe/london">Europe/London</option>
 				</select>
+
+				<div>
+
+					<input id="checkbox-enable-log" type="checkbox">
+					<label for="checkbox-enable-log">Enable log channel <button title="The log channel can still be always be accessed via the website.">i</button></label>
+				</div>
+
+				<div>
+
+					<input id="checkbox-auto-channels" type="checkbox">
+					<label for="checkbox-auto-channels">Create dedicated channels for me <button title="The bot will generate its necessary channels.">i</button></label>
+				</div>
+
+				<div id="config-manual-channels">
+
+					<div id="channel-select-div">
+
+						<label for="select-alert-channel">Alert Channel</label>
+						<select id="select-alert-channel" required>
+
+							<option value="012345678901234567">012345678901234567 (alerts)</option>
+						</select>
+
+						<label for="select-log-channel">Log Channel</label>
+						<select id="select-log-channel" required>
+
+							<option value="012345678901234567">012345678901234567 (logs)</option>
+						</select>
+					</div>
+					<div>
+
+						<button id="refresh-channels">?</button>
+					</div>
+
+					<button id="complete-button">Complete</button>
+				</div>
 			</form>
         </div>
 
