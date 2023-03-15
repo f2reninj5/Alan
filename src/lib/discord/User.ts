@@ -3,7 +3,7 @@ import { fetch } from '../Fetch'
 
 export default class User {
 
-    static async fetch(accessToken: string) {
+    public static async fetch(accessToken: string) {
 
         let user = await fetch('https://discord.com/api/users/@me', {
 
@@ -16,7 +16,7 @@ export default class User {
         return user.json()
     }
 
-    static async fetchGuilds(accessToken: string) {
+    public static async fetchGuilds(accessToken: string) {
 
         let guilds = await fetch('https://discord.com/api/users/@me/guilds', {
 
@@ -29,7 +29,7 @@ export default class User {
         return guilds.json()
     }
 
-    static async hasPermissionInGuild(accessToken: string, guildId: string) {
+    public static async hasPermissionInGuild(accessToken: string, guildId: string) {
 
         let guilds = await User.fetchGuilds(accessToken)
 

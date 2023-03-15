@@ -2,6 +2,7 @@
 import express from 'express'
 import Client from '../../lib/Client'
 import { User } from '../../lib/discord'
+import Guild from '../../lib/models/Guild'
 import OAuth from '../../lib/OAuth'
 
 const router = express.Router()
@@ -16,45 +17,65 @@ router.use((request, response, next) => {
     next()
 })
 
-router.get('/add', async (request, response) => {
+router.route('/add')
+    .get(async (request, response) => {
 
-    let guildId = request.query.guildId || request.query.guild_id
-    let code = request.query.code
+        let guildId = request.query.guildId || request.query.guild_id
+        let code = request.query.code
 
-    if (typeof guildId !== 'string') {
+        if (typeof guildId !== 'string') {
 
-        return response.redirect('/dashboard')
-    }
+            return response.redirect('/dashboard')
+        }
 
-    if (!code) {
+        if (!code) {
 
-        return response.redirect(OAuth.botInviteAuthURL(request, guildId))
-    }
+            return response.redirect(OAuth.botInviteAuthURL(request, guildId))
+        }
 
-    let guild = await Client.guilds.fetch(guildId)
+        let guild = await Client.guilds.fetch(guildId)
 
-    return response.render('guild/add', {
+        return response.render('guild/add', {
 
-        guild
+            guild
+        })
     })
-})
+    .post(async (request, response) => {
 
-/* router.post('/add', async (request, response) => {
+        let body = request.body
+        let guildId = body.guildId
 
-    let guildId = request.params.guildId
+        if (!(await User.hasPermissionInGuild(request.cookies.access_token, guildId))) {
 
-    if (!(await User.hasPermissionInGuild(request.cookies.access_token, guildId))) {
+            return response.redirect('/dashboard')
+        }
 
-        return response.redirect('/dashboard')
-    }
+        let guild = await Client.guilds.fetch(guildId)
 
-    // let guild = await Client.guilds.fetch(guildId)
+        let guildData = {
 
-    // get config settings from post body
-    // add guild to database
+            name: guild.name,
+            icon_url: guild.iconURL() || undefined,
+            member_count: guild.memberCount,
+        }
 
-    return response.redirect(`/guild/${guildId}`)
-}) */
+        let guildSettingsData = {
+
+            alert_channel_id: body.alertChannelId || null,
+            log_channel_id: body.logChannelId || null,
+            region: ((body.region % 24) + 24) % 24 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
+        }
+
+        if (body.enableAutoChannels) {
+
+
+        }
+
+        await Guild.upsert(guildId, guildData)
+        await Guild.upsertSettings(guildId, guildSettingsData)
+
+        return response.redirect(`/guild/${guildId}`)
+    })
 
 router.get('/:guildId', async (request, response) => {
 

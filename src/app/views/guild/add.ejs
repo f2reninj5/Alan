@@ -15,57 +15,64 @@
 
 			<form id="config-form" method="post" action="/guild/add">
 
-				<div id="form-header">
+				<div id="config-form-header">
 
 					<img id="server-icon" src="<%- `${(locals.guild.iconURL() ? locals.guild.iconURL() : '/images/favicon.svg')}` %>">
 					<h id="server-name"><%- locals.guild.name %></h>
 				</div>
 
 				<label for="guild-id-input">Guild ID</label>
-				<input id="guild-id-input" value="<%- locals.guild.id %>" readonly required>
+				<input id="guild-id-input" name="guildId" value="<%- locals.guild.id %>" readonly required>
 
-				<label for="select-region">Region</label>
-				<select id="select-region" required>
+				<label for="region-select">Region</label>
+				<select id="region-select" name="region" required>
 
-					<option value="europe/dublin">America/Detroit</option>
-					<option value="europe/london">Europe/London</option>
+					<option value="-4">UTC-04:00</option>
+					<option value="-3">UTC-03:00</option>
+					<option value="-2">UTC-02:00</option>
+					<option value="-1">UTC-01:00</option>
+					<option value="0" selected>UTC+00:00</option>
+					<option value="1">UTC+01:00</option>
+					<option value="2">UTC+02:00</option>
+					<option value="3">UTC+03:00</option>
+					<option value="4">UTC+04:00</option>
 				</select>
 
 				<div>
 
-					<input id="checkbox-enable-log" type="checkbox">
-					<label for="checkbox-enable-log">Enable log channel <button title="The log channel can still be always be accessed via the website.">i</button></label>
+					<input id="enable-log-channel-checkbox" name="enableLogChannel" type="checkbox">
+					<label for="enable-log-channel-checkbox">Enable log channel <button type="button" title="The log channel can still be always be accessed via the website.">i</button></label>
 				</div>
 
 				<div>
 
-					<input id="checkbox-auto-channels" type="checkbox">
-					<label for="checkbox-auto-channels">Create dedicated channels for me <button title="The bot will generate its necessary channels.">i</button></label>
+					<input id="auto-channels-checkbox" name="enableAutoChannels" type="checkbox" checked>
+					<label for="auto-channels-checkbox">Create dedicated channels for me <button type="button" title="The bot will generate its necessary channels.">i</button></label>
 				</div>
 
-				<div id="config-manual-channels">
+				<div id="config-form-manual-channels-div">
 
-					<div id="channel-select-div">
+					<div id="config-form-channel-select-div">
 
-						<label for="select-alert-channel">Alert Channel</label>
-						<select id="select-alert-channel" required>
+						<label for="alert-channel-select">Alert Channel</label>
+						<select id="alert-channel-select" name="alertChannelId" required disabled>
 
 							<option value="012345678901234567">012345678901234567 (alerts)</option>
 						</select>
 
-						<label for="select-log-channel">Log Channel</label>
-						<select id="select-log-channel" required>
+						<label for="log-channel-select">Log Channel</label>
+						<select id="log-channel-select" name="logChannelId" required disabled>
 
 							<option value="012345678901234567">012345678901234567 (logs)</option>
 						</select>
 					</div>
 					<div>
 
-						<button id="refresh-channels">?</button>
+						<button id="config-form-manual-channels-refresh" type="button">?</button>
 					</div>
-
-					<button id="complete-button">Complete</button>
 				</div>
+				
+				<button id="config-form-complete-button" type="submit">Complete</button>
 			</form>
         </div>
 

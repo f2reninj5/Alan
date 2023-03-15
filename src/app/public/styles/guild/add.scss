@@ -1,26 +1,4 @@
-input,
-select {
-
-    height: 2em;
-
-    padding: 0 0.5em 0 0.5em;
-
-    text-align: center;
-
-    color: var(--secondary);
-    background-color: var(--primary-alt);
-
-    border: none;
-    border-radius: 2em;
-}
-
-input:read-only,
-select:read-only,
-input:disabled,
-select:disabled {
-
-    color: var(--primary);
-}
+$enlarge-scale: 105%;
 
 #config-form {
 
@@ -29,36 +7,99 @@ select:disabled {
     gap: 1em;
 
     min-width: 30%;
-}
 
-#form-header {
+    input,
+    select {
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+        height: 2em;
 
-#form-header>* {
+        padding: 0 0.5em 0 0.5em;
 
-    font-size: 4em;
-    height: 1em;
-}
+        text-align: center;
 
-#config-manual-channels {
+        color: var(--secondary);
+        background-color: var(--primary-alt);
 
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
+        border: none;
+        border-radius: 2em;
 
-#config-manual-channels>div {
+        &:hover,
+        &:focus {
 
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
+            transform: scale($enlarge-scale);
+        }
 
-#channel-select-div {
+        &[readonly],
+        &:disabled {
 
-    flex-grow: 1;
+            color: var(--primary);
+        }
+    }
+
+    button {
+
+        padding: {
+
+            left: 0.5em;
+            right: 0.5em;
+        }
+
+        color: var(--primary);
+        background-color: var(--secondary);
+
+        border: none;
+        border-radius: 2em;
+    }
+
+    &-complete-button {
+
+        display: block;
+
+        height: 2em;
+        padding: 0 0.5em 0 0.5em;
+
+        color: var(--primary);
+        background-color: var(--secondary);
+
+        border: none;
+        border-radius: 2em;
+
+        &:hover,
+        &:focus {
+
+            transform: scale($enlarge-scale);
+        }
+    }
+
+    &-header {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        >* {
+
+            font-size: 4em;
+            height: 1em;
+        }
+    }
+
+    &-manual-channels-div {
+
+        display: none;
+        flex-direction: row;
+        gap: 1em;
+
+        >div {
+
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+    }
+
+    &-channel-select-div {
+
+        flex-grow: 1;
+    }
 }

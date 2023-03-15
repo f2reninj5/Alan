@@ -7,24 +7,24 @@ import { secret } from '../etc/client.json'
 
 export default class OAuth {
 
-    static authPath = authPath
+    public static authPath = authPath
 
-    static host(request: Request): string {
+    public static host(request: Request): string {
 
         return request.protocol + '://' + request.headers.host
     }
 
-    static fullURL(request: Request): string {
+    public static fullURL(request: Request): string {
 
         return OAuth.host(request) + request.originalUrl
     }
 
-    static authRoute(request: Request) {
+    public static authRoute(request: Request) {
 
         return OAuth.host(request) + authPath
     }
 
-    static authURL(clientId: string, scope: string, options: { name: string, value: string }[]): string {
+    public static authURL(clientId: string, scope: string, options: { name: string, value: string }[]): string {
 
         let parameters = new URLSearchParams({
 
@@ -42,7 +42,7 @@ export default class OAuth {
         return authURL
     }
 
-    static defaultAuthURL(request: Request) {
+    public static defaultAuthURL(request: Request) {
 
         return OAuth.authURL(Client.user!.id, scope, [
 
@@ -57,7 +57,7 @@ export default class OAuth {
         ])
     }
 
-    static botInviteAuthURL(request: Request, guildId: string) {
+    public static botInviteAuthURL(request: Request, guildId: string) {
 
         return OAuth.authURL(Client.user!.id, 'bot applications.commands', [
 
@@ -80,7 +80,7 @@ export default class OAuth {
         ])
     }
 
-    static async fetchAccessToken(request: Request, code: any) {
+    public static async fetchAccessToken(request: Request, code: any) {
 
         let data = await fetch('https://discord.com/api/oauth2/token', {
 
