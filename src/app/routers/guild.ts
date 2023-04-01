@@ -59,11 +59,13 @@ router.route('/add')
             member_count: guild.memberCount,
         }
 
+        function mod(a: number, b: number): number { return ((a % b) + b) % b }
+
         let guildSettingsData = {
 
             alert_channel_id: body.alertChannelId || null,
             log_channel_id: body.logChannelId || null,
-            region: ((body.region % 24) + 24) % 24 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
+            region: mod((body.region + 11), 24) - 11 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
         }
 
         if (body.enableAutoChannels) {

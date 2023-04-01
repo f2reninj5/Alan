@@ -1,5 +1,6 @@
 
 import Discord from 'discord.js'
+import { Events, GatewayIntentBits } from 'discord.js'
 import { token } from '../etc/client.json'
 
 class Client extends Discord.Client {
@@ -33,9 +34,14 @@ class Client extends Discord.Client {
     }
 }
 
-const client = new Client({ intents: ['GUILDS'] }) // { intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] }
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] })
 
 client.login(token)
+
+client.on(Events.ClientReady, async (client) => {
+
+    console.log('Bot online.')
+})
 
 client.on('guildCreate', (guild) => {
 
@@ -43,3 +49,5 @@ client.on('guildCreate', (guild) => {
 })
 
 export default client
+
+import './bot/MessageHandler'

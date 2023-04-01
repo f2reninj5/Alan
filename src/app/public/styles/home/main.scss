@@ -1,17 +1,15 @@
 .console {
 
-    text-align: left;
-
+    width: 80%;
     padding: 2em;
 
-    width: 80%;
-
+    text-align: left;
     background-color: var(--primary-alt);
-}
 
-.console * {
+    * {
 
-    font-size: 1.2rem;
+        font-size: 1.2rem;
+    }
 }
 
 #console-cursor {
@@ -24,6 +22,7 @@
 @keyframes blink {
 
     50% {
+
         opacity: 0;
     }
 }
@@ -33,14 +32,17 @@
 @keyframes copy {
 
     0% {
+
         color: transparent;
     }
 
     50% {
+
         color: var(--primary-alt);
     }
 
     100% {
+
         color: transparent;
     }
 }
@@ -53,20 +55,21 @@
     height: 8em;
 
     color: transparent;
-}
 
-.colour:hover {
+    :hover {
 
-    border-style: unset;
-}
+        border-style: unset;
+    }
 
-.colour:active {
+    :active {
 
-    border-style: inset;
+        border-style: inset;
+    }
 }
 
 .colour-box {
 
     padding: 1em;
+
     background-color: var(--primary-alt);
 }
