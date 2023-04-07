@@ -4,19 +4,12 @@ import configure from './middleware/default'
 import { authoriseRouter, guildRouter } from './routers/index'
 import { User } from '../lib/discord'
 import OAuth from '../lib/OAuth'
-import client from '../lib/Client'
-import Database from '../lib/Database'
 
 const app = express()
 configure(app)
 
 app.use(OAuth.authPath, authoriseRouter)
 app.use('/guild', guildRouter)
-
-app.get('/test', async (request, response) => {
-
-    response.send(await Database.upsert('users', ['user_id', 'username'], ['43242', 'HELLO']))
-})
 
 app.get('/', async (request, response) => {
 

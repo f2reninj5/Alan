@@ -33,6 +33,13 @@ export default class User {
 
         let guilds = await User.fetchGuilds(accessToken)
 
-        return guilds.find((guild: any) => guild.id == guildId && guild.permissions == 2147483647)
+        try {
+
+            return guilds.find((guild: any) => guild.id == guildId && guild.permissions == 2147483647)
+
+        } catch (error) {
+
+            return false
+        }
     }
 }

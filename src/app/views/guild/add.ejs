@@ -27,6 +27,13 @@
 				<label for="region-select">Region</label>
 				<select id="region-select" name="region" required>
 
+					<option value="-11">UTC-11:00</option>
+					<option value="-10">UTC-10:00</option>
+					<option value="-9">UTC-09:00</option>
+					<option value="-8">UTC-08:00</option>
+					<option value="-7">UTC-07:00</option>
+					<option value="-6">UTC-06:00</option>
+					<option value="-5">UTC-05:00</option>
 					<option value="-4">UTC-04:00</option>
 					<option value="-3">UTC-03:00</option>
 					<option value="-2">UTC-02:00</option>
@@ -36,6 +43,14 @@
 					<option value="2">UTC+02:00</option>
 					<option value="3">UTC+03:00</option>
 					<option value="4">UTC+04:00</option>
+					<option value="5">UTC+05:00</option>
+					<option value="6">UTC+06:00</option>
+					<option value="7">UTC+07:00</option>
+					<option value="8">UTC+08:00</option>
+					<option value="9">UTC+09:00</option>
+					<option value="10">UTC+10:00</option>
+					<option value="11">UTC+11:00</option>
+					<option value="12">UTC+12:00</option>
 				</select>
 
 				<div>
@@ -57,18 +72,24 @@
 						<label for="alert-channel-select">Alert Channel</label>
 						<select id="alert-channel-select" name="alertChannelId" required disabled>
 
-							<option value="012345678901234567">012345678901234567 (alerts)</option>
+							<% for (let channel of locals.channels) { %>
+								
+								<option value="<%- channel.id %>"><%- channel.id%> (<%- channel.name %>)</option>
+							<% } %>
 						</select>
 
 						<label for="log-channel-select">Log Channel</label>
 						<select id="log-channel-select" name="logChannelId" required disabled>
 
-							<option value="012345678901234567">012345678901234567 (logs)</option>
+							<% for (let channel of locals.channels) { %>
+
+								<option value="<%- channel.id %>"><%- channel.id%> (<%- channel.name %>)</option>
+							<% } %>
 						</select>
 					</div>
 					<div>
 
-						<button id="config-form-manual-channels-refresh" type="button">?</button>
+						<button id="config-form-manual-channels-refresh" type="button"><img class="refresh-icon" src="/images/icons/refresh.svg"></button>
 					</div>
 				</div>
 				

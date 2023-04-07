@@ -34,10 +34,13 @@ router.route('/add')
         }
 
         let guild = await Client.guilds.fetch(guildId)
+        let channels = await guild.channels.fetch()
+        let textChannels = channels.filter((channel) => channel!.type == 0)
 
         return response.render('guild/add', {
 
-            guild
+            guild,
+            channels: textChannels.map((channel) => { return { id: channel!.id, name: channel!.name } })
         })
     })
     .post(async (request, response) => {
@@ -74,6 +77,13 @@ router.route('/add')
         }
 
         await Guild.upsert(guildId, guildData)
+        await Guild.upsertChannel(body.alertChannelId, guildId, { type: 0 })
+
+        if (body.logChannelId) {
+
+            await Guild.upsertChannel(body.logChannelId, guildId, { type: 0 })
+        }
+
         await Guild.upsertSettings(guildId, guildSettingsData)
 
         return response.redirect(`/guild/${guildId}`)
@@ -95,7 +105,7 @@ router.get('/:guildId', async (request, response) => {
 
     } catch (error: any) { // replace with better check
 
-        if (error.httpStatus != 404) {
+        if (error.status != 404) {
 
             return response.redirect('/dashboard')
         }
@@ -112,6 +122,23 @@ router.get('/:guildId', async (request, response) => {
         user,
         guild
     })
+})
+
+router.post('/:guildId/channels', async (request, response) => {
+
+    let guildId = request.params.guildId
+    let access_token = request.body.access_token
+
+    if (!(await User.hasPermissionInGuild(access_token, guildId))) {
+
+        return response.status(403).json({})
+    }
+
+    let guild = await Client.guilds.fetch(guildId)
+    let channels = await guild.channels.fetch()
+    let textChannels = channels.filter((channel) => channel!.type == 0)
+
+    return response.send(textChannels.map((channel) => { return { id: channel!.id, name: channel!.name } }))
 })
 
 export default router

@@ -98,8 +98,23 @@ $enlarge-scale: 105%;
         }
     }
 
+    &-manual-channels-refresh {
+
+        &:hover,
+        &:focus {
+
+            transform: scale($enlarge-scale);
+        }
+    }
+
     &-channel-select-div {
 
         flex-grow: 1;
     }
+}
+
+.refresh-icon {
+
+    width: 1em;
+    height: 1em;
 }

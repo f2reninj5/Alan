@@ -10,6 +10,12 @@ interface GuildData {
     deleted?: boolean
 }
 
+interface ChannelData {
+
+    type: number,
+    deleted?: boolean
+}
+
 interface GuildSettingsData {
 
     region: number,
@@ -36,6 +42,22 @@ export default class Guild {
         }
 
         return Database.upsert('guilds', columns, values)
+    }
+
+    public static async upsertChannel(id: string, guildId: string, data: {}) {
+
+        let channelSettingsData = { channel_id: id, guild_id: guildId, ...data }
+        let columns = []
+        let values = []
+
+        for (let property in channelSettingsData) {
+
+            columns.push(property)
+            // @ts-ignore
+            values.push(channelSettingsData[property])
+        }
+
+        return Database.upsert('channels', columns, values)
     }
 
     public static async upsertSettings(id: string, data: GuildSettingsData) {
