@@ -16,11 +16,11 @@ function updateGuildChannels() {
 
             for (let channel of data) {
 
-                options += `\n<option value="${channel.id}">${channel.id} (${channel.name})</option>`
+                options += `\n<option value="${channel.id}">${channel.name}</option>`
             }
 
-            $('#alert-channel-select').html(options)
-            $('#log-channel-select').html(options)
+            $('#alert-channel-datalist').html(options)
+            $('#log-channel-datalist').html(options)
         }
     })
 }
@@ -33,6 +33,7 @@ $('[type=checkbox]').on('change', function (event) {
     $('#config-form-manual-channels-div').css('display', (enableAutoChannels ? 'none' : 'flex'))
     $('#alert-channel-select').prop('disabled', enableAutoChannels)
     $('#log-channel-select').prop('disabled', (!enableLogChannel || enableAutoChannels))
+    $('#log-channel-select').prop('placeholder', (!enableLogChannel || enableAutoChannels ? '' : 'Channel'))
 })
 
 $('#config-form-manual-channels-refresh').on('click', function (event) {

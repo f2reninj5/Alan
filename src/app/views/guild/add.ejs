@@ -53,16 +53,34 @@
 					<option value="12">UTC+12:00</option>
 				</select>
 
-				<div>
+				<div class="switch-div">
 
-					<input id="enable-log-channel-checkbox" name="enableLogChannel" type="checkbox">
-					<label for="enable-log-channel-checkbox">Enable log channel <button type="button" title="The log channel can still be always be accessed via the website.">i</button></label>
+					<label class="switch">
+
+						<input id="enable-log-channel-checkbox" name="enableLogChannel" type="checkbox">
+						<span class="slider round"></span>
+					</label>
+
+					<label for="enable-log-channel-checkbox">Enable log channel</label>
+					<button class="info-button" type="button" title="The log channel can still be always be accessed via the website.">
+						
+						<img class="info-icon" src="/images/icons/info.svg">
+					</button>
 				</div>
 
-				<div>
+				<div class="switch-div">
 
-					<input id="auto-channels-checkbox" name="enableAutoChannels" type="checkbox" checked>
-					<label for="auto-channels-checkbox">Create dedicated channels for me <button type="button" title="The bot will generate its necessary channels.">i</button></label>
+					<label class="switch">
+
+						<input id="auto-channels-checkbox" name="enableAutoChannels" type="checkbox" checked>
+						<span class="slider round"></span>
+					</label>
+
+					<label for="auto-channels-checkbox">Create dedicated channels for me</label>
+					<button class="info-button" type="button" title="The bot will generate its necessary channels.">
+						
+						<img class="info-icon" src="/images/icons/info.svg">
+					</button>
 				</div>
 
 				<div id="config-form-manual-channels-div">
@@ -70,22 +88,24 @@
 					<div id="config-form-channel-select-div">
 
 						<label for="alert-channel-select">Alert Channel</label>
-						<select id="alert-channel-select" name="alertChannelId" required disabled>
+						<input id="alert-channel-select" name="alertChannelId" list="alert-channel-datalist" placeholder="Channel" required disabled>
+						<datalist id="alert-channel-datalist">
 
 							<% for (let channel of locals.channels) { %>
 								
-								<option value="<%- channel.id %>"><%- channel.id%> (<%- channel.name %>)</option>
+								<option value="<%- channel.id %>"><%- channel.name %></option>
 							<% } %>
-						</select>
+						</datalist>
 
 						<label for="log-channel-select">Log Channel</label>
-						<select id="log-channel-select" name="logChannelId" required disabled>
+						<input id="log-channel-select" name="logChannelId" list="log-channel-datalist" placeholder="Channel" required disabled>
+						<datalist id="log-channel-datalist">
 
 							<% for (let channel of locals.channels) { %>
 
-								<option value="<%- channel.id %>"><%- channel.id%> (<%- channel.name %>)</option>
+								<option value="<%- channel.id %>"><%- channel.name %></option>
 							<% } %>
-						</select>
+						</datalist>
 					</div>
 					<div>
 
